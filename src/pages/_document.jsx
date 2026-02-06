@@ -1,4 +1,4 @@
-import { Head, Html, Main, NextScript } from 'next/document'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
 
 const modeScript = `
   let darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
@@ -35,16 +35,20 @@ const modeScript = `
   }
 `
 
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head>
-        <script dangerouslySetInnerHTML={{ __html: modeScript }} />
-      </Head>
-      <body className="bg-white antialiased dark:bg-zinc-900">
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  )
+class MyDocument extends Document {
+  render() {
+    return (
+      <Html lang="en">
+        <Head>
+          <script dangerouslySetInnerHTML={{ __html: modeScript }} />
+        </Head>
+        <body className="bg-white antialiased dark:bg-zinc-900">
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    )
+  }
 }
+
+export default MyDocument
